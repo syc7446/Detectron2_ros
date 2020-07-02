@@ -2,8 +2,11 @@
 import sys
 import threading
 
+sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
+sys.path.append('~/.virtualenvs/detectron2_ros/lib/python3.6/site-packages/')
 import cv2 as cv
 import numpy as np
+sys.path.append('/opt/ros/kinetic/lib/python2.7/dist-packages')
 import rospy
 from detectron2.config import get_cfg
 from detectron2.data import MetadataCatalog

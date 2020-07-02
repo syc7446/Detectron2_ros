@@ -19,7 +19,7 @@ echo '. /usr/local/bin/virtualenvwrapper.sh' >> ~/.bashrc
 
 2. Creating Virtual Environment
 ```bash
-mkvirtualenv --python=python3 detectron2_ros
+mkvirtualenv --python=python3.6 detectron2_ros
 ```
 
 3. [Install the dependencies in the virtual environment](https://github.com/facebookresearch/detectron2/blob/master/INSTALL.md)
@@ -28,7 +28,6 @@ mkvirtualenv --python=python3 detectron2_ros
 pip install -U torch==1.4+cu100 torchvision==0.5+cu100 -f https://download.pytorch.org/whl/torch_stable.html
 pip install cython pyyaml==5.1
 pip install -U 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
-pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu100/index.html
 pip install opencv-python
 pip install rospkg
 ```
@@ -36,17 +35,19 @@ pip install rospkg
 
 ## Downloading the Package
 
-3. Clone the package to the ROS workspace using git tools
+Clone the package to the ROS workspace using git tools
 ```bash
 git clone https://github.com/DavidFernandezChaves/detectron2_ros.git
 cd detectron2_ros
 git pull --all
 git submodule update --init
+workon detectron2_ros
+python -m pip install -e detectron2
 ```
 
 ## Compilation
 
-4. Attention: DO NOT USE the python virtual environment previously built to compile catking packages.
+Attention: DO NOT USE the python virtual environment previously built to compile catking packages.
 ```bash
 catkin_make
 source $HOME/.bashrc
@@ -54,13 +55,11 @@ source $HOME/.bashrc
 
 ## Running
 
-1. First launch ROScore into a terminal.
-
-2. Next, open a new terminal and use the virtual environment created.
+1. Open a new terminal and use the virtual environment created.
 ```bash
 workon detectron2_ros
 ```
-3. Running the node
+2. Running the node
 ```bash
 roslaunch detectron2_ros detectron2_ros.launch
 ```
